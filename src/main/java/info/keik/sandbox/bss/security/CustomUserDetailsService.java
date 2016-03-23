@@ -28,14 +28,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
 		return new JdbcTemplate(dataSource).query(DEF_USERS_BY_USERNAME_QUERY, new String[] { username }, new RowMapper<UserDetails>() {
 			public UserDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
 				String id = rs.getString(1);
 				String password = rs.getString(2);
 				return new User(id, password, true, true, true, true, AuthorityUtils.NO_AUTHORITIES);
 			}
-
 		}).get(0);
 	}
 }
