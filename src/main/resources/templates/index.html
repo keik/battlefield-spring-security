@@ -6,11 +6,50 @@
   </head>
   <body>
 
-    hello
-
-    <form action="/logout">
-      <input type="submit" value="logout"/>
+    <h2>Request: ??? /method_authentication_1</h2>
+    <p>
+      only POST required authenticaiton
+    </p>
+    <button class="get"    data-url="/method_authentication_1">GET</button>
+    <button class="post"   data-url="/method_authentication_1">POST</button>
+    <button class="put"    data-url="/method_authentication_1">PUT</button>
+    <button class="delete" data-url="/method_authentication_1">DELETE</button>
+    <div>
+      <a href="/method_authentication_1">GET</a>
+    </div>
+    <form action="/method_authentication_1" method="post">
+      <input type="text" name="a" value="x2"/>
+      <input type="submit"/>
     </form>
 
+    <h2>Request: ??? /method_authentication_2</h2>
+    <p>
+      only GET required authenticaiton
+    </p>
+    <button class="get"    data-url="/method_authentication_2">GET</button>
+    <button class="post"   data-url="/method_authentication_2">POST</button>
+    <button class="put"    data-url="/method_authentication_2">PUT</button>
+    <button class="delete" data-url="/method_authentication_2">DELETE</button>
+    <div>
+      <a href="/method_authentication_2">GET</a>
+    </div>
+    <form action="/method_authentication_2" method="post">
+      <input type="text" name="a" value="x4"/>
+      <input type="submit"/>
+    </form>
+
+    <script>
+      Array.prototype.forEach.call(document.querySelectorAll('button'), function(el) {
+        el.addEventListener('click', function(e) {
+          var xhr = new XMLHttpRequest();
+          xhr.addEventListener('readystatechange', function() {
+            if (xhr.readyState === XMLHttpRequest.DONE)
+              console.log(xhr.response)
+          });
+          xhr.open(e.target.className.toUpperCase(), e.target.dataset.url);
+          xhr.send();
+        });
+      });
+    </script>
   </body>
 </html>
